@@ -101,13 +101,22 @@
         .social-links img:hover {
             transform: scale(1.1);
         }
+
+        .skills img {
+    width: 80px; /* Ubah ukuran lebar menjadi 80px */
+    height: 80px; /* Ubah ukuran tinggi menjadi 80px */
+    transition: transform 0.3s ease;
+}
+.skills img:hover {
+    transform: scale(1.1); /* Efek hover untuk animasi */
+}
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Header dengan Foto Profil -->
         <div class="header">
-            <img src="./img/nabil.jpg" alt="Foto Profil" class="profile-picture"> <!-- Ganti link ini dengan URL foto Anda -->
+            <img src="img/nabil.jpg" alt="Foto Profil" class="profile-picture"> <!-- Ganti link ini dengan URL foto Anda -->
             <h1>Hi There! 👋 I'm Nabil Aditya!</h1>
             <h3>Hello! I am a dedicated student at Batam Polytechnic with a deep passion for Software Engineering and Cybersecurity. I actively explore software development technologies while continuously seeking opportunities to expand my programming and security knowledge.</h3>
         </div>
@@ -115,11 +124,11 @@
         <!-- Skills Section -->
         <div class="section">
             <h2>⚒️ Languages-Frameworks-Tools ⚒️</h2>
-            <div class="skills">
-                <img src="https://skillicons.dev/icons?i=bootstrap,html,css,vscode,github,figma,notion,git" />
-                <br>
-                <img src="https://skillicons.dev/icons?i=nodejs,python,javascript,cpp,java,php,laravel,flask,jquery,mysql,azure,windows" alt="Skill Icons" />
-            </div>
+        <div class="skills">
+    <img src="https://skillicons.dev/icons?i=bootstrap,html,css,vscode,github,figma,notion,git" />
+    <br>
+    <img src="https://skillicons.dev/icons?i=nodejs,python,javascript,cpp,java,php,laravel,flask,jquery,mysql,azure,windows" alt="Skill Icons" />
+</div>
         </div>
 
         <!-- Work Experience Section -->
