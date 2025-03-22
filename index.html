@@ -12,120 +12,300 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
         }
+        
+        /* Animated bubble background */
+        .bubble-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background-color: rgba(88, 166, 255, 0.1);
+            border-radius: 50%;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
+            animation: rise linear infinite;
+            opacity: 0;
+        }
+        
+        @keyframes rise {
+            0% {
+                opacity: 0.3;
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                opacity: 0.5;
+                transform: translateY(-50vh) translateX(20px);
+            }
+            75% {
+                opacity: 0.3;
+                transform: translateY(-75vh) translateX(-20px);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(0);
+            }
+        }
+        
         h1, h2, h3 {
             color: #58a6ff;
         }
+        
         a {
             color: #58a6ff;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
+        
         a:hover {
             text-decoration: underline;
+            color: #8bb6fe;
         }
+        
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1;
         }
+        
         .header {
             text-align: center;
             padding: 50px 0;
+            animation: fadeIn 1s ease-in-out;
         }
+        
         .profile-picture {
             width: 150px;
             height: 150px;
             border-radius: 50%;
             border: 5px solid #58a6ff;
             margin-bottom: 20px;
+            transition: all 0.5s ease;
+            animation: pulse 3s infinite alternate;
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.5);
         }
+        
+        .profile-picture:hover {
+            transform: scale(1.05);
+            border-color: #8bb6fe;
+            box-shadow: 0 0 30px rgba(88, 166, 255, 0.8);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px rgba(88, 166, 255, 0.5); }
+            100% { box-shadow: 0 0 25px rgba(88, 166, 255, 0.8); }
+        }
+        
         .header h1 {
             font-size: 2.5em;
             margin: 0;
+            animation: slideInDown 1s ease;
         }
+        
         .header h3 {
             font-size: 1.2em;
             margin: 10px 0 0;
+            animation: slideInUp 1s ease;
         }
+        
         .section {
             margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+            background-color: rgba(22, 27, 34, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
+        
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         .section h2 {
             font-size: 1.8em;
             margin-bottom: 20px;
             border-bottom: 2px solid #58a6ff;
             padding-bottom: 10px;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background-color: #58a6ff;
+            animation: slideBorder 2s forwards;
+        }
+        
+        @keyframes slideBorder {
+            to { left: 0; }
+        }
+        
         .section ul {
             list-style-type: none;
             padding: 0;
         }
+        
         .section ul li {
-            background: #161b22;
+            background: rgba(22, 27, 34, 0.8);
             margin: 10px 0;
             padding: 15px;
             border-radius: 5px;
             border-left: 5px solid #58a6ff;
+            transition: all 0.3s ease;
+            transform: translateX(-10px);
+            opacity: 0;
+            animation: slideInLeft 0.5s forwards;
+            animation-delay: calc(var(--item-index) * 0.1s);
         }
+        
+        .section ul li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            background: rgba(28, 35, 48, 0.9);
+        }
+        
         .section ul li b {
             color: #58a6ff;
         }
+        
         .section ul li i {
             color: #8b949e;
         }
+        
         .skills {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 15px;
         }
+        
         .skills img {
             width: 80%;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: grayscale(20%);
         }
+        
         .skills img:hover {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
+            filter: grayscale(0%);
         }
+        
         .social-links {
             display: flex;
             justify-content: center;
             gap: 20px;
             margin-top: 20px;
         }
+        
+        .social-links a {
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+        
         .social-links img {
             width: 100%;
             transition: transform 0.3s ease;
         }
+        
         .social-links img:hover {
             transform: scale(1.1);
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Typing effect for heading */
+        .typing-effect {
+            overflow: hidden;
+            border-right: 3px solid #58a6ff;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.15em;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #58a6ff; }
         }
     </style>
 </head>
 <body>
+    <!-- Animated bubble background -->
+    <div class="bubble-container" id="bubble-container"></div>
+    
     <div class="container">
         <!-- Header dengan Foto Profil -->
         <div class="header">
             <img src="img/nabil.jpg" alt="Foto Profil" class="profile-picture"> 
-            <h1>Hi There! 👋 I'm Nabil Aditya!</h1>
+            <h1 class="typing-effect">Hi There! 👋 I'm Nabil Aditya!</h1>
             <br>
             <h3>Hello! I am a dedicated student at Batam Polytechnic with a deep passion for Software Engineering and Cybersecurity. I actively explore software development technologies while continuously seeking opportunities to expand my programming and security knowledge.</h3>
         </div>
 
         <!-- Skills Section -->
-        <div class="section">
+        <div class="section" id="skills-section">
              <h2 style="text-align: center;">⚒️ Languages-Frameworks-Tools ⚒️</h2>
-        <div class="skills">
-    <img src="https://skillicons.dev/icons?i=bootstrap,html,css,vscode,github,figma,notion,git,azure,windows" alt="Skill Icons"/>
-    <br>
-    <img src="https://skillicons.dev/icons?i=nodejs,python,javascript,cpp,java,php,laravel,flask,jquery,mysql" alt="Skill Icons" />
-</div>
+            <div class="skills">
+                <img src="https://skillicons.dev/icons?i=bootstrap,html,css,vscode,github,figma,notion,git,azure,windows" alt="Skill Icons"/>
+                <br>
+                <img src="https://skillicons.dev/icons?i=nodejs,python,javascript,cpp,java,php,laravel,flask,jquery,mysql" alt="Skill Icons" />
+            </div>
         </div>
 
         <!-- Work Experience Section -->
-        <div class="section">
-    <h2 style="text-align: center;">💼 Work Experience 💼</h2>
-
-            <ul>
+        <div class="section" id="work-section">
+            <h2 style="text-align: center;">💼 Work Experience 💼</h2>
+            <ul id="work-list">
                 <li><b>Software Development Team Lead</b> - PBL - Politeknik Negeri Batam (Feb 2024 - Sekarang)<br>
                     <i>Project Aplikasi Berbasis Website Eco Enzyme (Ecozyne)</i>
                 </li>
@@ -151,9 +331,9 @@
         </div>
 
         <!-- Education Section -->
-        <div class="section">
+        <div class="section" id="education-section">
              <h2 style="text-align: center;">🎓 Education 🎓</h2>
-            <ul>
+            <ul id="education-list">
                 <li><b>Software Engineering Student</b> - Politeknik Negeri Batam (Aug 2024 - Now)<br>
                     <i>Informatics Engineering - Software Engineering</i>
                 </li>
@@ -164,9 +344,9 @@
         </div>
 
         <!-- Certification Section -->
-        <div class="section">
+        <div class="section" id="certification-section">
              <h2 style="text-align: center;">🏆 Certification 🏆</h2>
-            <ul>
+            <ul id="certification-list">
                 <li><b>Certified Ethical Hacker</b> - Cisco Academy (Aug 2024)</li>
                 <li><b>Certified Junior Web Development</b> - Badan Nasional Sertifikasi Profesi (BNSP) (Nov 2024)</li>
                 <li><b>Certified Training Junior Web Development</b> - Kominfo (Jul 2024)</li>
@@ -177,20 +357,95 @@
         </div>
 
         <!-- Contact Section -->
-        <div class="section">
+        <div class="section" id="contact-section">
             <h2 style="text-align: center;">📫 Contact Me</h2>
             <div class="social-links">
-                <a href="mailto:nabiladitya2203@gmail.com">
+                <a href="mailto:nabiladitya2203@gmail.com" class="hover-effect">
                     <img src="https://img.shields.io/badge/Gmail-333333?style=for-the-badge&logo=gmail&logoColor=red" alt="Gmail" />
                 </a>
-                <a href="https://www.linkedin.com/in/-nabiladityaa/" target="_blank">
+                <a href="https://www.linkedin.com/in/-nabiladityaa/" target="_blank" class="hover-effect">
                     <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
                 </a>
-                <a href="https://www.instagram.com/nabiladtya" target="_blank">
+                <a href="https://www.instagram.com/nabiladtya" target="_blank" class="hover-effect">
                     <img src="https://img.shields.io/badge/instagram-FF5722?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
                 </a>
             </div>
         </div>
     </div>
+
+    <script>
+        // Create animated bubble background
+        document.addEventListener('DOMContentLoaded', function() {
+            const bubbleContainer = document.getElementById('bubble-container');
+            
+            // Function to create a single bubble
+            function createBubble() {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                // Random size between 20px and 120px
+                const size = Math.floor(Math.random() * 100) + 20;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                
+                // Random horizontal position
+                const posX = Math.floor(Math.random() * 100);
+                bubble.style.left = posX + '%';
+                
+                // Random animation duration between 15s and 30s
+                const duration = Math.floor(Math.random() * 15) + 15;
+                bubble.style.animationDuration = duration + 's';
+                
+                // Set z-index randomly to create depth effect
+                const zIndex = Math.floor(Math.random() * 10) - 5;
+                bubble.style.zIndex = zIndex;
+                
+                // Add bubble to container
+                bubbleContainer.appendChild(bubble);
+                
+                // Remove bubble after animation completes
+                setTimeout(() => {
+                    bubble.remove();
+                }, duration * 1000);
+            }
+            
+            // Create initial bubbles
+            for (let i = 0; i < 15; i++) {
+                setTimeout(createBubble, i * 300);
+            }
+            
+            // Continue creating bubbles at intervals
+            setInterval(createBubble, 800);
+            
+            // Add reveal animation for sections
+            const sections = document.querySelectorAll('.section');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        
+                        // Animate list items one by one
+                        if (entry.target.querySelector('ul')) {
+                            const items = entry.target.querySelectorAll('li');
+                            items.forEach((item, index) => {
+                                item.style.setProperty('--item-index', index);
+                            });
+                        }
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
 </body>
 </html>
