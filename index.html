@@ -259,24 +259,38 @@
         }
         
         /* Typing effect for heading */
-        .typing-effect {
-            overflow: hidden;
-            border-right: 3px solid #58a6ff;
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: 0.15em;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-        
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: #58a6ff; }
-        }
+    .typing-effect {
+    overflow: hidden;
+    border-right: 3px solid #58a6ff;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.15em;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Ukuran responsif */
+    text-align: center;
+}
+
+/* RESPONSIF: Teks turun ke bawah di layar HP */
+@media (max-width: 480px) {
+    .typing-effect {
+        display: block;
+        white-space: normal; 
+        border-right: none; 
+        font-size: 1.2rem; 
+        word-break: break-word; 
+    }
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #58a6ff; }
+}
+
     </style>
 </head>
 <body>
