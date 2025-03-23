@@ -129,6 +129,46 @@
             text-decoration: none;
         }
         
+   .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #c9d1d9;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Mobile menu */
+        @media (max-width: 768px) {
+            .navbar-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                flex-direction: column;
+                background-color: rgba(22, 27, 34, 0.98);
+                width: 70%;
+                height: 100vh;
+                padding: 20px;
+                transition: all 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+                gap: 10px;
+            }
+            
+            .navbar-links.active {
+                right: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar-links a {
+                width: 100%;
+                padding: 12px;
+                border-radius: 5px;
+            }
+        }
+
         
         .container {
             max-width: 800px;
@@ -447,9 +487,16 @@
     <div class="bubble-container" id="bubble-container"></div>
     
     <!-- Navbar -->
-    <nav class="navbar" id="navbar">
+ <nav class="navbar" id="navbar">
         <a href="#" class="navbar-brand">Nabil Aditya</a>
-         <button class="mobile-menu-btn" id="mobile-menu-btn"></button>
+        <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        <div class="navbar-links" id="navbar-links">
+            <a href="#skills-section">Skills</a>
+            <a href="#work-section">Work</a>
+            <a href="#education-section">Education</a>
+            <a href="#certification-section">Certification</a>
+            <a href="#contact-section">Contact</a>
+        </div>
     </nav>
     
     <div class="container">
