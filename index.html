@@ -129,45 +129,6 @@
             text-decoration: none;
         }
         
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: #c9d1d9;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Mobile menu */
-        @media (max-width: 768px) {
-            .navbar-links {
-                position: fixed;
-                top: 60px;
-                right: -100%;
-                flex-direction: column;
-                background-color: rgba(22, 27, 34, 0.98);
-                width: 70%;
-                height: 100vh;
-                padding: 20px;
-                transition: all 0.3s ease;
-                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-                gap: 10px;
-            }
-            
-            .navbar-links.active {
-                right: 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .navbar-links a {
-                width: 100%;
-                padding: 12px;
-                border-radius: 5px;
-            }
-        }
         
         .container {
             max-width: 800px;
