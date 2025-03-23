@@ -72,12 +72,110 @@
             color: #8bb6fe;
         }
         
+        /* Navbar styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background-color: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 5%;
+            background-color: rgba(13, 17, 23, 0.98);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-brand {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #58a6ff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .navbar-brand:hover {
+            text-decoration: none;
+        }
+        
+        .navbar-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar-links a {
+            color: #c9d1d9;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-links a:hover {
+            color: #58a6ff;
+            background-color: rgba(88, 166, 255, 0.1);
+            text-decoration: none;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #c9d1d9;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Mobile menu */
+        @media (max-width: 768px) {
+            .navbar-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                flex-direction: column;
+                background-color: rgba(22, 27, 34, 0.98);
+                width: 70%;
+                height: 100vh;
+                padding: 20px;
+                transition: all 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+                gap: 10px;
+            }
+            
+            .navbar-links.active {
+                right: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .navbar-links a {
+                width: 100%;
+                padding: 12px;
+                border-radius: 5px;
+            }
+        }
+        
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             position: relative;
             z-index: 1;
+            padding-top: 80px; /* Space for fixed navbar */
         }
         
         .header {
@@ -131,6 +229,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
+            scroll-margin-top: 80px; /* For smooth scrolling with navbar */
         }
         
         .section.visible {
@@ -237,6 +336,96 @@
             transform: scale(1.1);
         }
         
+        /* Footer styles */
+        .footer {
+            background-color: rgba(22, 27, 34, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        
+        .footer-links a {
+            color: #c9d1d9;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #58a6ff;
+            background-color: rgba(88, 166, 255, 0.1);
+            text-decoration: none;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        
+        .footer-social a {
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 10px;
+            color: #8b949e;
+            font-size: 0.9em;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #58a6ff;
+            color: #0d1117;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+            transform: translateY(20px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background-color: #8bb6fe;
+        }
+        
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -259,43 +448,55 @@
         }
         
         /* Typing effect for heading */
-    .typing-effect {
-    overflow: hidden;
-    border-right: 3px solid #58a6ff;
-    white-space: nowrap;
-    margin: 0 auto;
-    letter-spacing: 0.15em;
-    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-    font-size: clamp(1.5rem, 5vw, 2.5rem); /* Ukuran responsif */
-    text-align: center;
-}
-
-/* RESPONSIF: Teks turun ke bawah di layar HP */
-@media (max-width: 480px) {
-    .typing-effect {
-        display: block;
-        white-space: normal; 
-        border-right: none; 
-        font-size: 1.2rem; 
-        word-break: break-word; 
-    }
-}
-
-@keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-@keyframes blink-caret {
-    from, to { border-color: transparent; }
-    50% { border-color: #58a6ff; }
-}
-
+        .typing-effect {
+            overflow: hidden;
+            border-right: 3px solid #58a6ff;
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.15em;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+            font-size: clamp(1.5rem, 5vw, 2.5rem); /* Ukuran responsif */
+            text-align: center;
+        }
+        
+        /* RESPONSIF: Teks turun ke bawah di layar HP */
+        @media (max-width: 480px) {
+            .typing-effect {
+                display: block;
+                white-space: normal; 
+                border-right: none; 
+                font-size: 1.2rem; 
+                word-break: break-word; 
+            }
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #58a6ff; }
+        }
     </style>
 </head>
 <body>
     <!-- Animated bubble background -->
     <div class="bubble-container" id="bubble-container"></div>
+    
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="navbar-brand">Nabil Aditya</a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn">☰</button>
+        <div class="navbar-links" id="navbar-links">
+            <a href="#skills-section">Skills</a>
+            <a href="#work-section">Work</a>
+            <a href="#education-section">Education</a>
+            <a href="#certification-section">Certification</a>
+            <a href="#contact-section">Contact</a>
+        </div>
+    </nav>
     
     <div class="container">
         <!-- Header dengan Foto Profil -->
@@ -308,7 +509,7 @@
 
         <!-- Skills Section -->
         <div class="section" id="skills-section">
-             <h2 style="text-align: center;">⚒️ Languages-Frameworks-Tools ⚒️</h2>
+             <h2 style="text-align: center;">⚒️ Skills-Languages-Frameworks-Tools ⚒️</h2>
             <div class="skills">
                 <img src="https://skillicons.dev/icons?i=bootstrap,html,css,vscode,github,figma,notion,git,stackoverflow,nginx,sqlite,mysql" alt="Skill Icons"/>
                 <br>
@@ -386,11 +587,34 @@
             </div>
         </div>
     </div>
+    
+    <!-- Back to top button -->
+    <div class="back-to-top" id="back-to-top">↑</div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#skills-section">Skills</a>
+                <a href="#work-section">Work</a>
+                <a href="#education-section">Education</a>
+                <a href="#certification-section">Certification</a>
+                <a href="#contact-section">Contact</a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Nabil Aditya. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
 
     <script>
         // Create animated bubble background
         document.addEventListener('DOMContentLoaded', function() {
             const bubbleContainer = document.getElementById('bubble-container');
+            const navbar = document.getElementById('navbar');
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const navbarLinks = document.getElementById('navbar-links');
+            const backToTop = document.getElementById('back-to-top');
             
             // Function to create a single bubble
             function createBubble() {
@@ -430,6 +654,68 @@
             
             // Continue creating bubbles at intervals
             setInterval(createBubble, 800);
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                navbarLinks.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('.navbar-links') && !event.target.closest('.mobile-menu-btn')) {
+                    navbarLinks.classList.remove('active');
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.navbar-links a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navbarLinks.classList.remove('active');
+                });
+            });
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                    backToTop.classList.add('visible');
+                } else {
+                    navbar.classList.remove('scrolled');
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') {
+                        // If it's the top of the page
+                        window.scrollTo({
+                            top: 0,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        // For other sections
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+            
+            // Back to top button
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
             
             // Add reveal animation for sections
             const sections = document.querySelectorAll('.section');
