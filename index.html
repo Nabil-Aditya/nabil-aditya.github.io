@@ -480,6 +480,46 @@
             from, to { border-color: transparent; }
             50% { border-color: #58a6ff; }
         }
+
+
+        .realskills-container {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .realskills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 100%;
+            width: 100%;
+            padding: 10px;
+        }
+
+        .realskills-box {
+            background-color: #3622a7;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 0px 12px 0px 12px; /* Atas kanan & bawah kiri */
+            font-weight: bold;
+        }
+
+        /* Responsive untuk tablet & HP */
+        @media (max-width: 600px) {
+            .realskills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .realskills-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
     </style>
 </head>
 <body>
@@ -506,13 +546,38 @@
 
         <!-- Skills Section -->
         <div class="section" id="skills-section">
-             <h2 style="text-align: center;">⚒️ Skills-Languages-Frameworks-Tools ⚒️</h2>
+             <h2 style="text-align: center;">⚒️ Languages-Frameworks-Tools ⚒️</h2>
             <div class="skills">
                 <img src="https://skillicons.dev/icons?i=bootstrap,html,css,vscode,github,figma,notion,git,stackoverflow,nginx,sqlite,mysql" alt="Skill Icons"/>
                 <br>
                 <img src="https://skillicons.dev/icons?i=nodejs,python,javascript,cpp,java,php,laravel,flask,jquery,azure,windows" alt="Skill Icons" />
             </div>
         </div>
+
+        
+          <!-- realskills Section -->
+          <div class="section" id="realskills-section">
+            <h2 style="text-align: center;">💡 Skills 💡</h2>
+            <div class="realskills-grid">
+                <div class="realskills-box">Leadership</div>
+                <div class="realskills-box">Team Management</div>
+                <div class="realskills-box">Business Analyst</div>
+                <div class="realskills-box">Analyst Software Requirement</div>
+                <div class="realskills-box">Agile Methodology</div>
+                <div class="realskills-box">Scrum Master</div>
+                <div class="realskills-box">Public Speaking</div>
+                <div class="realskills-box">Ui/UX Designer</div>
+                <div class="realskills-box">Web Development</div>
+                <div class="realskills-box">Web Security</div>
+                <div class="realskills-box">Programmer</div>
+                <div class="realskills-box">Basic Networking</div>
+                <div class="realskills-box">Testing</div>
+                <div class="realskills-box">Bug Bounty</div>
+                <div class="realskills-box">Cybersecurty Fundamentals</div>
+                <div class="realskills-box">Database Management</div>
+            </div>
+       </div>
+
 
         <!-- Work Experience Section -->
         <div class="section" id="work-section">
@@ -564,6 +629,8 @@
                 <li><b>Certified Training Junior Web Development</b> - Kominfo (Jul 2024)</li>
                 <li><b>Certified Asean Data Science</b> - Asean Foundation (Aug 2024)</li>
                 <li><b>Certified Junior Programmer</b> - Badan Nasional Sertifikasi Profesi (BNSP) (Feb 2024)</li>
+                <li><b>Certified Course Basic Cybersecurity</b> - ID-Networkers (Dec 2023)</li>
+                <li><b>Certified Course Basic Computer Network</b> - ID-Networkers (Aug 2023)</li>
                 <li><b>Certified Training Cyber Security</b> - Microsoft (Aug 2023)</li>
             </ul>
         </div>
@@ -592,7 +659,8 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-links">
-                <a href="#skills-section">Skills</a>
+                <a href="#skills-section">Tools</a>
+                <a href="#realskills-section">Skills</a>
                 <a href="#work-section">Work</a>
                 <a href="#education-section">Education</a>
                 <a href="#certification-section">Certification</a>
