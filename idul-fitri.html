@@ -75,6 +75,12 @@
             padding: 10px;
         }
         
+        .profile-picture {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         .greeting {
             position: relative;
             z-index: 10;
@@ -371,15 +377,40 @@
             
             <div class="container">
                 <div class="photo-container">
-                    <!-- Replace with user's photo or use a placeholder -->
-                    <div class="placeholder-img">
-                        <img src="img/nabil.jpg" alt="Foto Profil" class="profile-picture"> 
-                    </div>
+                    <!-- Profile picture with object-fit: cover to ensure it fills the circular container -->
+                    <img src="img/nabil.jpg" alt="Foto Profil" class="profile-picture">
                 </div>
                 
                 <div class="greeting">
                     <h1>Selamat Hari Raya</h1>
                     <p class="subtitle">Mohon maaf lahir dan batin atas segala kesalahan yang disengaja maupun tidak disengaja.
 
-<br>
-Semoga pintu maaf selalu terbuka di hati kita. Dengan ketulusan hati ini, mari kita jalin silaturahmi yang lebih erat, hapus segala dendam, dan mulai lembaran baru dengan penuh kasih sayang.
+                    <br>
+                    Semoga pintu maaf selalu terbuka di hati kita. Dengan ketulusan hati ini, mari kita jalin silaturahmi yang lebih erat, hapus segala dendam, dan mulai lembaran baru dengan penuh kasih sayang.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Added Footer with contact information -->
+    <footer>
+        <div class="container">
+            <h3>Hubungi Saya</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+62 812 3456 7890</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <span>@nabil_instagram</span>
+                </div>
+            </div>
+            <div class="social-icons">
+                <a href="tel:+6281234567890"><i class="fas fa-phone"></i></a>
+                <a href="https://instagram.com/nabil_instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
