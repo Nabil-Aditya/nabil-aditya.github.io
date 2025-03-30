@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Hari Raya</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: url('https://source.unsplash.com/1600x900/?eid') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        h1 {
+            font-size: 3em;
+            animation: fadeIn 3s ease-in-out;
+        }
+        .mosque {
+            width: 200px;
+            animation: float 3s infinite alternate;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-20px); }
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin: 20px;
+            border: none;
+            cursor: pointer;
+            background: gold;
+            color: black;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background: darkgoldenrod;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Selamat Hari Raya Idul Fitri!</h1>
+        <img class="mosque" src="https://upload.wikimedia.org/wikipedia/commons/6/67/Mosque_Icon.png" alt="Mosque">
+        <p>Mohon maaf lahir dan batin.</p>
+        <button class="button" onclick="terimaTHR()">Terima THR</button>
+        <button class="button" onclick="kirimBNI()">Kirim ke Bank BNI</button>
+    </div>
+    <script>
+        function terimaTHR() {
+            alert("Selamat! Anda menerima THR.");
+        }
+        function kirimBNI() {
+            alert("THR Anda telah dikirim ke Bank BNI.");
+        }
+    </script>
+</body>
+</html>
