@@ -1,0 +1,385 @@
+Selamat datang di papan klip Gboard, teks apa pun yang Anda salin akan disimpan di sini.<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Hari Raya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f9f0;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #e0f5e0 0%, #c7eed4 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2380c080' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+        
+        .photo-container {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .placeholder-img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #7dc47d, #5aaa5a);
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .greeting {
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #2e7d32;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #388e3c;
+            font-weight: 300;
+            max-width: 600px;
+        }
+        
+        .decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .ketupat {
+            position: absolute;
+            opacity: 0.7;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .ketupat:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            transform: rotate(15deg);
+            animation-delay: 0s;
+        }
+        
+        .ketupat:nth-child(2) {
+            top: 20%;
+            right: 10%;
+            transform: rotate(-10deg);
+            animation-delay: 1s;
+        }
+        
+        .ketupat:nth-child(3) {
+            bottom: 15%;
+            left: 15%;
+            transform: rotate(5deg);
+            animation-delay: 2s;
+        }
+        
+        .ketupat:nth-child(4) {
+            bottom: 25%;
+            right: 20%;
+            transform: rotate(-20deg);
+            animation-delay: 3s;
+        }
+        
+        .star {
+            position: absolute;
+            opacity: 0.7;
+            animation: twinkle 3s ease-in-out infinite;
+        }
+        
+        .star:nth-child(5) {
+            top: 15%;
+            left: 25%;
+            animation-delay: 0.5s;
+        }
+        
+        .star:nth-child(6) {
+            top: 25%;
+            right: 15%;
+            animation-delay: 1.5s;
+        }
+        
+        .star:nth-child(7) {
+            bottom: 20%;
+            left: 30%;
+            animation-delay: 2.5s;
+        }
+        
+        .star:nth-child(8) {
+            bottom: 30%;
+            right: 25%;
+            animation-delay: 3.5s;
+        }
+        
+        .mosque {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 150px;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0);
+            }
+            50% {
+                transform: translateY(-20px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0);
+            }
+        }
+        
+        @keyframes twinkle {
+            0% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 0.2;
+                transform: scale(0.8);
+            }
+        }
+        
+        footer {
+            background-color: #2e7d32;
+            color: #f0f9f0;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-item i {
+            font-size: 1.2rem;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #f0f9f0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive styles */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .photo-container {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .mosque {
+                height: 100px;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .photo-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .mosque {
+                height: 80px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <main>
+        <section class="hero">
+            <div class="decoration">
+                <!-- Green Ketupat -->
+                <div class="ketupat">
+                    <svg width="80" height="80" viewBox="0 0 100 100">
+                        <polygon points="50,10 90,50 50,90 10,50" fill="#e0f5e0" stroke="#5aaa5a" stroke-width="3"/>
+                        <line x1="50" y1="10" x2="50" y2="90" stroke="#5aaa5a" stroke-width="2"/>
+                        <line x1="10" y1="50" x2="90" y2="50" stroke="#5aaa5a" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="ketupat">
+                    <svg width="60" height="60" viewBox="0 0 100 100">
+                        <polygon points="50,10 90,50 50,90 10,50" fill="#e0f5e0" stroke="#5aaa5a" stroke-width="3"/>
+                        <line x1="50" y1="10" x2="50" y2="90" stroke="#5aaa5a" stroke-width="2"/>
+                        <line x1="10" y1="50" x2="90" y2="50" stroke="#5aaa5a" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="ketupat">
+                    <svg width="70" height="70" viewBox="0 0 100 100">
+                        <polygon points="50,10 90,50 50,90 10,50" fill="#e0f5e0" stroke="#5aaa5a" stroke-width="3"/>
+                        <line x1="50" y1="10" x2="50" y2="90" stroke="#5aaa5a" stroke-width="2"/>
+                        <line x1="10" y1="50" x2="90" y2="50" stroke="#5aaa5a" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div class="ketupat">
+                    <svg width="50" height="50" viewBox="0 0 100 100">
+                        <polygon points="50,10 90,50 50,90 10,50" fill="#e0f5e0" stroke="#5aaa5a" stroke-width="3"/>
+                        <line x1="50" y1="10" x2="50" y2="90" stroke="#5aaa5a" stroke-width="2"/>
+                        <line x1="10" y1="50" x2="90" y2="50" stroke="#5aaa5a" stroke-width="2"/>
+                    </svg>
+                </div>
+                
+                <!-- Stars -->
+                <div class="star">
+                    <svg width="20" height="20" viewBox="0 0 50 50">
+                        <polygon points="25,5 30,20 45,20 35,30 40,45 25,35 10,45 15,30 5,20 20,20" fill="#fcf59b"/>
+                    </svg>
+                </div>
+                <div class="star">
+                    <svg width="15" height="15" viewBox="0 0 50 50">
+                        <polygon points="25,5 30,20 45,20 35,30 40,45 25,35 10,45 15,30 5,20 20,20" fill="#fcf59b"/>
+                    </svg>
+                </div>
+                <div class="star">
+                    <svg width="25" height="25" viewBox="0 0 50 50">
+                        <polygon points="25,5 30,20 45,20 35,30 40,45 25,35 10,45 15,30 5,20 20,20" fill="#fcf59b"/>
+                    </svg>
+                </div>
+                <div class="star">
+                    <svg width="18" height="18" viewBox="0 0 50 50">
+                        <polygon points="25,5 30,20 45,20 35,30 40,45 25,35 10,45 15,30 5,20 20,20" fill="#fcf59b"/>
+                    </svg>
+                </div>
+                
+                <!-- Mosque Silhouette -->
+                <div class="mosque">
+                    <svg viewBox="0 0 800 200" preserveAspectRatio="none">
+                        <path d="M0,200 L0,120 L50,120 L50,100 L70,100 L90,80 L110,100 L130,100 L130,120 L180,120 L180,90 L200,90 C215,90 215,60 230,60 C245,60 245,90 260,90 L280,90 L280,120 L330,120 L330,100 L350,100 L370,80 L390,100 L410,100 L410,120 L460,120 L460,90 L480,90 C495,90 495,60 510,60 C525,60 525,90 540,90 L560,90 L560,120 L610,120 L610,100 L630,100 L650,80 L670,100 L690,100 L690,120 L740,120 L740,150 L800,150 L800,200 Z" fill="#2e7d32"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="photo-container">
+                    <!-- Replace with user's photo or use a placeholder -->
+                    <div class="placeholder-img">
+                        <img src="img/nabil.jpg" alt="Foto Profil" class="profile-picture"> 
+                    </div>
+                </div>
+                
+                <div class="greeting">
+                    <h1>Selamat Hari Raya</h1>
+                    <p class="subtitle">Mohon maaf lahir dan batin atas segala kesalahan yang disengaja maupun tidak disengaja.
+
+<br>
+Semoga pintu maaf selalu terbuka di hati kita. Dengan ketulusan hati ini, mari kita jalin silaturahmi yang lebih erat, hapus segala dendam, dan mulai lembaran baru dengan penuh kasih sayang.
