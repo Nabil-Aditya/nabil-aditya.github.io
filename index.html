@@ -16,768 +16,573 @@
 <meta property="og:description" content="Portofolio resmi Software Engineer & Cybersecurity Enthusiast.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://Nabil-Aditya.github.io">
-     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0d1117;
-            color: #c9d1d9;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            position: relative;
-            overflow-x: hidden;
+<style>
+    /* Reset dan base styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Ubuntu Mono', 'Courier New', monospace;
+        background: linear-gradient(135deg, #2C001E 0%, #5E2750 100%);
+        color: #F2F2F2;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        overflow-x: hidden;
+    }
+    
+    /* Container utama - kotak terminal Ubuntu */
+    .terminal-container {
+        width: 100%;
+        max-width: 1000px;
+        min-height: 90vh;
+        background-color: #300A24;
+        border-radius: 8px;
+        box-shadow: 
+            0 0 0 1px rgba(255,255,255,0.05),
+            0 10px 40px rgba(0,0,0,0.5),
+            0 0 80px rgba(120, 0, 60, 0.3);
+        overflow: hidden;
+        position: relative;
+    }
+    
+    /* Header terminal (tab bar) */
+    .terminal-header {
+        background: linear-gradient(to bottom, #3C3C3C 0%, #2C2C2C 100%);
+        height: 30px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        border-bottom: 1px solid #1A1A1A;
+    }
+    
+    .terminal-buttons {
+        display: flex;
+        gap: 8px;
+    }
+    
+    .terminal-button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+    
+    .terminal-button.close {
+        background-color: #FF5F57;
+    }
+    
+    .terminal-button.minimize {
+        background-color: #FFBD2E;
+    }
+    
+    .terminal-button.maximize {
+        background-color: #28CA42;
+    }
+    
+    .terminal-title {
+        flex-grow: 1;
+        text-align: center;
+        color: #D0D0D0;
+        font-size: 13px;
+        font-weight: 500;
+    }
+    
+    /* Konten terminal */
+    .terminal-content {
+        padding: 25px;
+        height: calc(100% - 30px);
+        overflow-y: auto;
+        background-color: #300A24;
+    }
+    
+    /* Prompt command line */
+    .prompt {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+        white-space: nowrap;
+        font-size: 16px;
+    }
+    
+    .user {
+        color: #FF8700;
+        font-weight: bold;
+    }
+    
+    .at {
+        color: #FFFFFF;
+    }
+    
+    .host {
+        color: #5FD7FF;
+        font-weight: bold;
+    }
+    
+    .path {
+        color: #AFD700;
+        font-weight: bold;
+    }
+    
+    .dollar {
+        color: #D7005F;
+        margin: 0 8px;
+    }
+    
+    .cursor {
+        display: inline-block;
+        width: 8px;
+        height: 16px;
+        background-color: #F2F2F2;
+        animation: blink 1s infinite;
+        vertical-align: middle;
+        margin-left: 2px;
+    }
+    
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+    
+    /* Command output */
+    .command-output {
+        margin-bottom: 25px;
+        color: #F2F2F2;
+        line-height: 1.6;
+    }
+    
+    /* Section styles dalam terminal */
+    .section {
+        margin-bottom: 30px;
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeInUp 0.5s forwards;
+        animation-delay: calc(var(--section-index) * 0.1s);
+    }
+    
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .section h2 {
+        color: #FF8700;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #5E2750;
+        padding-bottom: 8px;
+    }
+    
+    .section ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+    
+    .section ul li {
+        background-color: rgba(46, 10, 35, 0.7);
+        margin: 8px 0;
+        padding: 12px 15px;
+        border-left: 3px solid #FF8700;
+        border-radius: 0 4px 4px 0;
+        color: #E6E6E6;
+        font-size: 0.95rem;
+    }
+    
+    .section ul li b {
+        color: #5FD7FF;
+    }
+    
+    .section ul li i {
+        color: #AFD700;
+        font-style: normal;
+    }
+    
+    /* Skills grid */
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+        margin-top: 15px;
+    }
+    
+    .skill-item {
+        background-color: rgba(94, 39, 80, 0.3);
+        border: 1px solid #5E2750;
+        border-radius: 4px;
+        padding: 10px;
+        text-align: center;
+        transition: all 0.3s ease;
+        color: #FF8700;
+        font-weight: 500;
+    }
+    
+    .skill-item:hover {
+        background-color: rgba(94, 39, 80, 0.6);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    /* Ikon skills */
+    .skills-icons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 15px;
+    }
+    
+    .skill-icon {
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 135, 0, 0.1);
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #FF8700;
+        border: 1px solid rgba(255, 135, 0, 0.3);
+    }
+    
+    /* Header dengan foto profil */
+    .profile-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px 0;
+        border-bottom: 1px solid #5E2750;
+    }
+    
+    .profile-picture {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 3px solid #FF8700;
+        margin-bottom: 15px;
+        object-fit: cover;
+        object-position: center;
+    }
+    
+    .profile-name {
+        color: #5FD7FF;
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+    }
+    
+    .profile-title {
+        color: #AFD700;
+        font-size: 1rem;
+    }
+    
+    /* Social links */
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .social-link {
+        background-color: rgba(94, 39, 80, 0.5);
+        color: #FF8700;
+        padding: 8px 15px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        border: 1px solid #5E2750;
+        transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+        background-color: rgba(255, 135, 0, 0.2);
+        color: #FFAF5F;
+        text-decoration: none;
+    }
+    
+    /* Footer terminal */
+    .terminal-footer {
+        background-color: rgba(30, 0, 20, 0.8);
+        padding: 15px;
+        text-align: center;
+        border-top: 1px solid #5E2750;
+        color: #AFD700;
+        font-size: 0.9rem;
+    }
+    
+    /* Scrollbar styling */
+    .terminal-content::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    .terminal-content::-webkit-scrollbar-track {
+        background: #2C001E;
+    }
+    
+    .terminal-content::-webkit-scrollbar-thumb {
+        background: #5E2750;
+        border-radius: 5px;
+    }
+    
+    .terminal-content::-webkit-scrollbar-thumb:hover {
+        background: #7A3368;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .terminal-container {
+            min-height: 95vh;
         }
         
-        /* Animated bubble background */
-        .bubble-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1;
+        .skills-grid {
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         }
         
-        .bubble {
-            position: absolute;
-            bottom: -100px;
-            background-color: rgba(88, 166, 255, 0.1);
-            border-radius: 50%;
-            border: 1px solid rgba(88, 166, 255, 0.2);
-            box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
-            animation: rise linear infinite;
-            opacity: 0;
+        .terminal-content {
+            padding: 15px;
         }
         
-        @keyframes rise {
-            0% {
-                opacity: 0.3;
-                transform: translateY(0) translateX(0);
-            }
-            50% {
-                opacity: 0.5;
-                transform: translateY(-50vh) translateX(20px);
-            }
-            75% {
-                opacity: 0.3;
-                transform: translateY(-75vh) translateX(-20px);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100vh) translateX(0);
-            }
-        }
-        
-        h1, h2, h3 {
-            color: #58a6ff;
-        }
-        
-        a {
-            color: #58a6ff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        a:hover {
-            text-decoration: underline;
-            color: #8bb6fe;
-        }
-        
-        /* Navbar styles */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background-color: rgba(13, 17, 23, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 999;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .navbar.scrolled {
-            padding: 10px 5%;
-            background-color: rgba(13, 17, 23, 0.98);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .navbar-brand {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #58a6ff;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-        
-        .navbar-brand:hover {
-            text-decoration: none;
-        }
-        
-        .navbar-links {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .navbar-links a {
-            color: #c9d1d9;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 6px 12px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .navbar-links a:hover {
-            color: #58a6ff;
-            background-color: rgba(88, 166, 255, 0.1);
-            text-decoration: none;
-        }
-        
-   .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: #c9d1d9;
+        .profile-name {
             font-size: 1.5rem;
-            cursor: pointer;
         }
-        
-        /* Mobile menu */
-        @media (max-width: 768px) {
-            .navbar-links {
-                position: fixed;
-                top: 60px;
-                right: -100%;
-                flex-direction: column;
-                background-color: rgba(22, 27, 34, 0.98);
-                width: 70%;
-                height: 100vh;
-                padding: 20px;
-                transition: all 0.3s ease;
-                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
-                gap: 10px;
-            }
-            
-            .navbar-links.active {
-                right: 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .navbar-links a {
-                width: 100%;
-                padding: 12px;
-                border-radius: 5px;
-            }
-        }
-
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-            padding-top: 80px; /* Space for fixed navbar */
-        }
-        
-        .header {
-            text-align: center;
-            padding: 50px 0;
-            animation: fadeIn 1s ease-in-out;
-        }
-        
+    }
+    
+    @media (max-width: 480px) {
         .profile-picture {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 5px solid #58a6ff;
-            margin-bottom: 20px;
-            transition: all 0.5s ease;
-            animation: pulse 3s infinite alternate;
-            box-shadow: 0 0 20px rgba(88, 166, 255, 0.5);
-            object-fit: cover;
-            object-position: center;
+            width: 100px;
+            height: 100px;
         }
         
-        .profile-picture:hover {
-            transform: scale(1.05);
-            border-color: #8bb6fe;
-            box-shadow: 0 0 30px rgba(88, 166, 255, 0.8);
+        .skills-grid {
+            grid-template-columns: repeat(2, 1fr);
         }
         
-        @keyframes pulse {
-            0% { box-shadow: 0 0 10px rgba(88, 166, 255, 0.5); }
-            100% { box-shadow: 0 0 25px rgba(88, 166, 255, 0.8); }
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            margin: 0;
-            animation: slideInDown 1s ease;
-        }
-        
-        .header h3 {
-            font-size: 1.2em;
-            margin: 10px 0 0;
-            animation: slideInUp 1s ease;
-        }
-        
-        .section {
-            margin-bottom: 40px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s ease;
-            background-color: rgba(22, 27, 34, 0.7);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            scroll-margin-top: 80px; /* For smooth scrolling with navbar */
-        }
-        
-        .section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .section h2 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #58a6ff;
-            padding-bottom: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: -100%;
-            width: 100%;
-            height: 2px;
-            background-color: #58a6ff;
-            animation: slideBorder 2s forwards;
-        }
-        
-        @keyframes slideBorder {
-            to { left: 0; }
-        }
-        
-        .section ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        
-        .section ul li {
-            background: rgba(22, 27, 34, 0.8);
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px;
-            border-left: 5px solid #58a6ff;
-            transition: all 0.3s ease;
-            transform: translateX(-10px);
-            opacity: 0;
-            animation: slideInLeft 0.5s forwards;
-            animation-delay: calc(var(--item-index) * 0.1s);
-        }
-        
-        .section ul li:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            background: rgba(28, 35, 48, 0.9);
-        }
-        
-        .section ul li b {
-            color: #58a6ff;
-        }
-        
-        .section ul li i {
-            color: #8b949e;
-        }
-        
-        .skills {
-            display: flex;
-            justify-content: center;
+        .prompt {
+            font-size: 14px;
             flex-wrap: wrap;
-            gap: 15px;
         }
-        
-        .skills img {
-            width: 90%;
-            transition: transform 0.3s ease, filter 0.3s ease;
-            filter: grayscale(20%);
-        }
-        
-        .skills img:hover {
-            transform: scale(1.1) rotate(5deg);
-            filter: grayscale(0%);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            transition: transform 0.3s ease;
-            display: inline-block;
-        }
-        
-        .social-links a:hover {
-            transform: translateY(-5px);
-        }
-        
-        .social-links img {
-            width: 100%;
-            transition: transform 0.3s ease;
-        }
-        
-        .social-links img:hover {
-            transform: scale(1.1);
-        }
-        
-        /* Footer styles */
-        .footer {
-            background-color: rgba(22, 27, 34, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 30px 0;
-            text-align: center;
-            margin-top: 40px;
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 10px 0;
-        }
-        
-        .footer-links a {
-            color: #c9d1d9;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: #58a6ff;
-            background-color: rgba(88, 166, 255, 0.1);
-            text-decoration: none;
-        }
-        
-        .footer-social {
-            display: flex;
-            gap: 15px;
-            margin: 10px 0;
-        }
-        
-        .footer-social a {
-            transition: transform 0.3s ease;
-        }
-        
-        .footer-social a:hover {
-            transform: translateY(-5px);
-        }
-        
-        .copyright {
-            margin-top: 10px;
-            color: #8b949e;
-            font-size: 0.9em;
-        }
-        
-        .back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #58a6ff;
-            color: #0d1117;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 100;
-            transform: translateY(20px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .back-to-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .back-to-top:hover {
-            background-color: #8bb6fe;
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideInDown {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        @keyframes slideInUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        
-        @keyframes slideInLeft {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        /* Typing effect for heading */
-        .typing-effect {
-            overflow: hidden;
-            border-right: 3px solid #58a6ff;
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: 0.15em;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-            font-size: clamp(1.5rem, 5vw, 2.5rem); /* Ukuran responsif */
-            text-align: center;
-        }
-        
-        /* RESPONSIF: Teks turun ke bawah di layar HP */
-        @media (max-width: 480px) {
-            .typing-effect {
-                display: block;
-                white-space: normal; 
-                border-right: none; 
-                font-size: 1.2rem; 
-                word-break: break-word; 
-            }
-        }
-        
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: #58a6ff; }
-        }
-
-
-        .realskills-container {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .realskills-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            max-width: 100%;
-            width: 100%;
-            padding: 10px;
-        }
-
-        .realskills-box {
-            background-color: #3622a7;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            border-radius: 0px 12px 0px 12px; /* Atas kanan & bawah kiri */
-            font-weight: bold;
-        }
-
-        /* Responsive untuk tablet & HP */
-        @media (max-width: 600px) {
-            .realskills-grid {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 90%;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .realskills-grid {
-                grid-template-columns: repeat(1, 1fr);
-            }
-        }
-    </style>
+    }
+    
+    /* Efek kedipan kursor saat load */
+    .initial-cursor {
+        display: inline-block;
+        width: 8px;
+        height: 16px;
+        background-color: #F2F2F2;
+        animation: blink 1s infinite;
+        vertical-align: middle;
+        margin-left: 2px;
+    }
+    
+    /* Style untuk daftar pekerjaan dan sertifikasi */
+    .work-item, .cert-item {
+        position: relative;
+        padding-left: 20px;
+    }
+    
+    .work-item:before, .cert-item:before {
+        content: "▶";
+        color: #FF8700;
+        position: absolute;
+        left: 0;
+        font-size: 0.8rem;
+    }
+</style>
 </head>
 <body>
-    <!-- Animated bubble background -->
-    <div class="bubble-container" id="bubble-container"></div>
-    
-    <!-- Navbar -->
- <nav class="navbar" id="navbar">
-        <a href="#" class="navbar-brand">Nabil Aditya</a>
-     <button class="mobile-menu-btn" id="mobile-menu-btn" style="margin-right: 52px;">☰</button>
-        <div class="navbar-links" id="navbar-links">
-            <a href="#skills-section" style="margin-right: 150px;">Start Read!</a>
-        </div>
-    </nav>
-    
-    <div class="container">
-        <!-- Header dengan Foto Profil -->
-        <div class="header">
-            <img src="img/nabil-profile.jpg" alt="Foto Profil" class="profile-picture"> 
-            <h1 class="typing-effect">Hi There! 👋 I'm Nabil Aditya!</h1>
-            <br>
-            <h3>Hello! I am a dedicated student at Batam Polytechnic with a deep passion for Software Engineering and Cybersecurity. I actively explore software development technologies while continuously seeking opportunities to expand my programming and security knowledge.</h3>
-        </div>
-
-        <!-- Skills Section -->
-        <div class="section" id="skills-section">
-             <h2 style="text-align: center;">⚒️ Languages-Frameworks-Tools ⚒️</h2>
-            <div class="skills">
-                <img src="https://skillicons.dev/icons?i=bootstrap,html,css,vscode,github,figma,notion,git,stackoverflow,nginx,sqlite,mysql" alt="Skill Icons"/>
-                <br>
-                <img src="https://skillicons.dev/icons?i=nodejs,python,javascript,cpp,java,php,laravel,flask,jquery,azure,windows" alt="Skill Icons" />
+    <!-- Terminal Ubuntu Container -->
+    <div class="terminal-container">
+        <!-- Header Terminal -->
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <div class="terminal-button close"></div>
+                <div class="terminal-button minimize"></div>
+                <div class="terminal-button maximize"></div>
             </div>
+            <div class="terminal-title">nabil@portfolio:~</div>
         </div>
-
         
-          <!-- realskills Section -->
-          <div class="section" id="realskills-section">
-            <h2 style="text-align: center;">💡 Skills 💡</h2>
-            <div class="realskills-grid">
-                <div class="realskills-box">Leadership</div>
-                <div class="realskills-box">Team Management</div>
-                <div class="realskills-box">Business Analyst</div>
-                <div class="realskills-box">Analyst Software Requirement</div>
-                <div class="realskills-box">Agile Methodology</div>
-                <div class="realskills-box">Scrum Master</div>
-                <div class="realskills-box">Public Speaking</div>
-                <div class="realskills-box">Ui/UX Designer</div>
-                <div class="realskills-box">Web Development</div>
-                <div class="realskills-box">Web Security</div>
-                <div class="realskills-box">Programmer</div>
-                <div class="realskills-box">Basic Networking</div>
-                <div class="realskills-box">Testing</div>
-                <div class="realskills-box">Bug Bounty</div>
-                <div class="realskills-box">Cybersecurty Fundamentals</div>
-                <div class="realskills-box">Database Management</div>
+        <!-- Konten Terminal -->
+        <div class="terminal-content">
+            <!-- Prompt dengan efek mengetik -->
+            <div class="prompt">
+                <span class="user">nabil</span><span class="at">@</span><span class="host">portfolio</span><span class="path">:~$</span><span class="dollar">$</span> cat about_me.txt
+                <span class="cursor"></span>
             </div>
-       </div>
-
-
-        <!-- Work Experience Section -->
-        <div class="section" id="work-section">
-            <h2 style="text-align: center;">💼 Work Experience 💼</h2>
-            <ul id="work-list">
-                <li><b>Software Development Team Lead</b> - PBL - Politeknik Negeri Batam (Feb 2024 - Sekarang)<br>
-                    <i>Project Aplikasi Berbasis Website Eco Enzyme (Ecozyne)</i>
-                </li>
-                <li><b>Software Development Team Lead</b> - PBL - Politeknik Negeri Batam (Aug 2024 - Jan 2025)<br>
-                    <i>Project Aplikasi Berbasis Website Pengajuan Pelatihan & LPJ (SIPELITA)</i>
-                </li>
-                <li><b>Software Engineer Intern</b> - PT. Oil Synergy Indonesia (Nov 2023 - Dec 2023)<br>
-                    <i>Project Aplikasi Berbasis Website Peminjaman Ruangan</i>
-                </li>
-                <li><b>Software Engineer Intern</b> - PT. UT Quality (Oct 2023 - Dec 2023)<br>
-                    <i>Project Aplikasi Berbasis Website Manajemen Barang</i>
-                </li>
-                <li><b>Software Engineer Intern</b> - BP Batam (Aug 2023 - Dec 2023)<br>
-                    <i>Project Aplikasi Berbasis Website Pengaduan Masyarakat, (Whistle Blower BP Batam)</i>
-                </li>
-                <li><b>Software Engineer Intern</b> - Kementerian Agama Kota Batam (Jul 2023 - Dec 2023)<br>
-                    <i>Project Aplikasi Berbasis Website Satu Data, (Satu Jari Kementerian Agama Kota Batam)</i>
-                </li>
-                <li><b>Software Engineer Intern</b> - LearningX Academy (Apr 2023 - Jul 2023)<br>
-                    <i>Project Aplikasi Berbasis Website, E-commerce Legacy Skate Board</i>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Education Section -->
-        <div class="section" id="education-section">
-             <h2 style="text-align: center;">🎓 Education 🎓</h2>
-            <ul id="education-list">
-                <li><b>Software Engineering Student</b> - Politeknik Negeri Batam (Aug 2024 - Now)<br>
-                    <i>Informatics Engineering - Software Engineering</i>
-                </li>
-                <li><b>Software Engineering Student</b> - SMK Negeri 7 Batam (Jun 2020 - May 2024)<br>
-                    <i>Informatics Engineering - Software Engineering</i>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Certification Section -->
-        <div class="section" id="certification-section">
-             <h2 style="text-align: center;">🏆 Certification 🏆</h2>
-            <ul id="certification-list">
-                <li><b>Certified Ethical Hacker</b> - Cisco Academy (Aug 2024)</li>
-                <li><b>Certified Junior Web Development</b> - Badan Nasional Sertifikasi Profesi (BNSP) (Nov 2024)</li>
-                <li><b>Certified Training Junior Web Development</b> - Kominfo (Jul 2024)</li>
-                <li><b>Certified Asean Data Science</b> - Asean Foundation (Aug 2024)</li>
-                <li><b>Certified Junior Programmer</b> - Badan Nasional Sertifikasi Profesi (BNSP) (Feb 2024)</li>
-                <li><b>Certified Course Basic Cybersecurity</b> - ID-Networkers (Dec 2023)</li>
-                <li><b>Certified Course Basic Computer Network</b> - ID-Networkers (Aug 2023)</li>
-                <li><b>Certified Training Cyber Security</b> - Microsoft (Aug 2023)</li>
-            </ul>
-        </div>
-
-        <!-- Contact Section -->
-        <div class="section" id="contact-section">
-            <h2 style="text-align: center;">📫 Contact Me</h2>
-            <div class="social-links">
-                <a href="mailto:nabiladitya2203@gmail.com" class="hover-effect">
-                    <img src="https://img.shields.io/badge/Gmail-333333?style=for-the-badge&logo=gmail&logoColor=red" alt="Gmail" />
-                </a>
-                <a href="https://www.linkedin.com/in/-nabiladityaa/" target="_blank" class="hover-effect">
-                    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-                </a>
-                <a href="https://www.instagram.com/nabiladtya" target="_blank" class="hover-effect">
-                    <img src="https://img.shields.io/badge/instagram-FF5722?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
-                </a>
+            
+            <!-- Header dengan profil -->
+            <div class="profile-header command-output">
+                <img src="img/nabil-profile.jpg" alt="Foto Profil" class="profile-picture" onerror="this.onerror=null; this.src='https://via.placeholder.com/120/300A24/FF8700?text=NB'">
+                <h1 class="profile-name">Muhammad Nabil Aditya Putera</h1>
+                <p class="profile-title">Software Engineering Student | Cybersecurity Enthusiast</p>
+                <p>Hello! I am a dedicated student at Batam Polytechnic with a deep passion for Software Engineering and Cybersecurity. I actively explore software development technologies while continuously seeking opportunities to expand my programming and security knowledge.</p>
             </div>
+            
+            <!-- Skills Section -->
+            <div class="section" style="--section-index: 1;">
+                <div class="prompt">
+                    <span class="user">nabil</span><span class="at">@</span><span class="host">portfolio</span><span class="path">:~$</span><span class="dollar">$</span> ls skills/
+                </div>
+                <div class="command-output">
+                    <h2>💻 Technical Skills</h2>
+                    <div class="skills-icons">
+                        <div class="skill-icon">HTML</div>
+                        <div class="skill-icon">CSS</div>
+                        <div class="skill-icon">JS</div>
+                        <div class="skill-icon">PHP</div>
+                        <div class="skill-icon">PY</div>
+                        <div class="skill-icon">C++</div>
+                        <div class="skill-icon">Java</div>
+                        <div class="skill-icon">SQL</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Professional Skills -->
+            <div class="section" style="--section-index: 2;">
+                <h2>🚀 Professional Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">Leadership</div>
+                    <div class="skill-item">Team Management</div>
+                    <div class="skill-item">Business Analyst</div>
+                    <div class="skill-item">Software Requirements</div>
+                    <div class="skill-item">Agile Methodology</div>
+                    <div class="skill-item">Scrum Master</div>
+                    <div class="skill-item">Public Speaking</div>
+                    <div class="skill-item">UI/UX Design</div>
+                    <div class="skill-item">Web Development</div>
+                    <div class="skill-item">Web Security</div>
+                    <div class="skill-item">Programming</div>
+                    <div class="skill-item">Basic Networking</div>
+                    <div class="skill-item">Testing</div>
+                    <div class="skill-item">Bug Bounty</div>
+                    <div class="skill-item">Cybersecurity</div>
+                    <div class="skill-item">Database Management</div>
+                </div>
+            </div>
+            
+            <!-- Work Experience -->
+            <div class="section" style="--section-index: 3;">
+                <div class="prompt">
+                    <span class="user">nabil</span><span class="at">@</span><span class="host">portfolio</span><span class="path">:~$</span><span class="dollar">$</span> cat experience.txt
+                </div>
+                <div class="command-output">
+                    <h2>💼 Work Experience</h2>
+                    <ul>
+                        <li class="work-item"><b>Software Development Team Lead</b> - PBL - Politeknik Negeri Batam (Feb 2024 - Sekarang)<br>
+                            <i>Project Aplikasi Berbasis Website Eco Enzyme (Ecozyne)</i>
+                        </li>
+                        <li class="work-item"><b>Software Development Team Lead</b> - PBL - Politeknik Negeri Batam (Aug 2024 - Jan 2025)<br>
+                            <i>Project Aplikasi Berbasis Website Pengajuan Pelatihan & LPJ (SIPELITA)</i>
+                        </li>
+                        <li class="work-item"><b>Software Engineer Intern</b> - PT. Oil Synergy Indonesia (Nov 2023 - Dec 2023)<br>
+                            <i>Project Aplikasi Berbasis Website Peminjaman Ruangan</i>
+                        </li>
+                        <li class="work-item"><b>Software Engineer Intern</b> - PT. UT Quality (Oct 2023 - Dec 2023)<br>
+                            <i>Project Aplikasi Berbasis Website Manajemen Barang</i>
+                        </li>
+                        <li class="work-item"><b>Software Engineer Intern</b> - BP Batam (Aug 2023 - Dec 2023)<br>
+                            <i>Project Aplikasi Berbasis Website Pengaduan Masyarakat, (Whistle Blower BP Batam)</i>
+                        </li>
+                        <li class="work-item"><b>Software Engineer Intern</b> - Kementerian Agama Kota Batam (Jul 2023 - Dec 2023)<br>
+                            <i>Project Aplikasi Berbasis Website Satu Data, (Satu Jari Kementerian Agama Kota Batam)</i>
+                        </li>
+                        <li class="work-item"><b>Software Engineer Intern</b> - LearningX Academy (Apr 2023 - Jul 2023)<br>
+                            <i>Project Aplikasi Berbasis Website, E-commerce Legacy Skate Board</i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Education -->
+            <div class="section" style="--section-index: 4;">
+                <div class="prompt">
+                    <span class="user">nabil</span><span class="at">@</span><span class="host">portfolio</span><span class="path">:~$</span><span class="dollar">$</span> ls education/
+                </div>
+                <div class="command-output">
+                    <h2>🎓 Education</h2>
+                    <ul>
+                        <li class="work-item"><b>Software Engineering Student</b> - Politeknik Negeri Batam (Aug 2024 - Now)<br>
+                            <i>Informatics Engineering - Software Engineering</i>
+                        </li>
+                        <li class="work-item"><b>Software Engineering Student</b> - SMK Negeri 7 Batam (Jun 2020 - May 2024)<br>
+                            <i>Informatics Engineering - Software Engineering</i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Certifications -->
+            <div class="section" style="--section-index: 5;">
+                <div class="prompt">
+                    <span class="user">nabil</span><span class="at">@</span><span class="host">portfolio</span><span class="path">:~$</span><span class="dollar">$</span> cat certifications.txt
+                </div>
+                <div class="command-output">
+                    <h2>🏆 Certifications</h2>
+                    <ul>
+                        <li class="cert-item"><b>Certified Ethical Hacker</b> - Cisco Academy (Aug 2024)</li>
+                        <li class="cert-item"><b>Certified Junior Web Development</b> - Badan Nasional Sertifikasi Profesi (BNSP) (Nov 2024)</li>
+                        <li class="cert-item"><b>Certified Training Junior Web Development</b> - Kominfo (Jul 2024)</li>
+                        <li class="cert-item"><b>Certified Asean Data Science</b> - Asean Foundation (Aug 2024)</li>
+                        <li class="cert-item"><b>Certified Junior Programmer</b> - Badan Nasional Sertifikasi Profesi (BNSP) (Feb 2024)</li>
+                        <li class="cert-item"><b>Certified Course Basic Cybersecurity</b> - ID-Networkers (Dec 2023)</li>
+                        <li class="cert-item"><b>Certified Course Basic Computer Network</b> - ID-Networkers (Aug 2023)</li>
+                        <li class="cert-item"><b>Certified Training Cyber Security</b> - Microsoft (Aug 2023)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Contact -->
+            <div class="section" style="--section-index: 6;">
+                <div class="prompt">
+                    <span class="user">nabil</span><span class="at">@</span><span class="host">portfolio</span><span class="path">:~$</span><span class="dollar">$</span> ./contact.sh
+                </div>
+                <div class="command-output">
+                    <h2>📫 Contact Me</h2>
+                    <div class="social-links">
+                        <a href="mailto:nabiladitya2203@gmail.com" class="social-link">Email</a>
+                        <a href="https://www.linkedin.com/in/-nabiladityaa/" target="_blank" class="social-link">LinkedIn</a>
+                        <a href="https://www.instagram.com/nabiladtya" target="_blank" class="social-link">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Terminal -->
+            <div class="prompt">
+                <span class="user">nabil</span><span class="at">@</span><span class="host">portfolio</span><span class="path">:~$</span><span class="dollar">$</span> <span class="initial-cursor"></span>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="terminal-footer">
+            &copy; 2025 Muhammad Nabil Aditya Putera. All rights reserved. | Portfolio v2.0 (Ubuntu Terminal Edition)
         </div>
     </div>
-    
-    <!-- Back to top button -->
-    <div class="back-to-top" id="back-to-top">↑</div>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#skills-section">Tools</a>
-                <a href="#realskills-section">Skills</a>
-                <a href="#work-section">Work</a>
-                <a href="#education-section">Education</a>
-                <a href="#certification-section">Certification</a>
-                <a href="#contact-section">Contact</a>
-            </div>
-            <div class="copyright">
-                &copy; 2025 Nabil Aditya. All Rights Reserved.
-            </div>
-        </div>
-    </footer>
 
     <script>
-        // Create animated bubble background
+        // Efek animasi untuk kursor dan prompt
         document.addEventListener('DOMContentLoaded', function() {
-            const bubbleContainer = document.getElementById('bubble-container');
-            const navbar = document.getElementById('navbar');
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const navbarLinks = document.getElementById('navbar-links');
-            const backToTop = document.getElementById('back-to-top');
+            const cursor = document.querySelector('.cursor');
+            const initialCursor = document.querySelector('.initial-cursor');
             
-            // Function to create a single bubble
-            function createBubble() {
-                const bubble = document.createElement('div');
-                bubble.classList.add('bubble');
-                
-                // Random size between 20px and 120px
-                const size = Math.floor(Math.random() * 100) + 20;
-                bubble.style.width = size + 'px';
-                bubble.style.height = size + 'px';
-                
-                // Random horizontal position
-                const posX = Math.floor(Math.random() * 100);
-                bubble.style.left = posX + '%';
-                
-                // Random animation duration between 15s and 30s
-                const duration = Math.floor(Math.random() * 15) + 15;
-                bubble.style.animationDuration = duration + 's';
-                
-                // Set z-index randomly to create depth effect
-                const zIndex = Math.floor(Math.random() * 10) - 5;
-                bubble.style.zIndex = zIndex;
-                
-                // Add bubble to container
-                bubbleContainer.appendChild(bubble);
-                
-                // Remove bubble after animation completes
-                setTimeout(() => {
-                    bubble.remove();
-                }, duration * 1000);
-            }
+            // Animasi kursor berkedip
+            setInterval(() => {
+                if (cursor) cursor.style.opacity = cursor.style.opacity == 0 ? 1 : 0;
+                if (initialCursor) initialCursor.style.opacity = initialCursor.style.opacity == 0 ? 1 : 0;
+            }, 500);
             
-            // Create initial bubbles
-            for (let i = 0; i < 15; i++) {
-                setTimeout(createBubble, i * 300);
-            }
-            
-            // Continue creating bubbles at intervals
-            setInterval(createBubble, 800);
-            
-            // Mobile menu toggle
-            mobileMenuBtn.addEventListener('click', function() {
-                navbarLinks.classList.toggle('active');
-            });
-            
-            // Close mobile menu when clicking outside
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.navbar-links') && !event.target.closest('.mobile-menu-btn')) {
-                    navbarLinks.classList.remove('active');
-                }
-            });
-            
-            // Close mobile menu when clicking on a link
-            document.querySelectorAll('.navbar-links a').forEach(link => {
-                link.addEventListener('click', function() {
-                    navbarLinks.classList.remove('active');
-                });
-            });
-            
-            // Navbar scroll effect
-            window.addEventListener('scroll', function() {
-                if (window.scrollY > 100) {
-                    navbar.classList.add('scrolled');
-                    backToTop.classList.add('visible');
-                } else {
-                    navbar.classList.remove('scrolled');
-                    backToTop.classList.remove('visible');
-                }
-            });
-            
-            // Smooth scroll for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') {
-                        // If it's the top of the page
-                        window.scrollTo({
-                            top: 0,
-                            behavior: 'smooth'
-                        });
-                    } else {
-                        // For other sections
+            // Efek scroll smooth
+            document.querySelectorAll('.social-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.getAttribute('href').startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
                         const targetElement = document.querySelector(targetId);
                         if (targetElement) {
                             targetElement.scrollIntoView({
@@ -788,35 +593,28 @@
                 });
             });
             
-            // Back to top button
-            backToTop.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
+            // Efek hover untuk skill items
+            document.querySelectorAll('.skill-item').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(255, 135, 0, 0.2)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'rgba(94, 39, 80, 0.3)';
                 });
             });
             
-            // Add reveal animation for sections
+            // Animasi untuk section saat scroll
             const sections = document.querySelectorAll('.section');
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             };
             
-            const observer = new IntersectionObserver(function(entries, observer) {
+            const observer = new IntersectionObserver(function(entries) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        
-                        // Animate list items one by one
-                        if (entry.target.querySelector('ul')) {
-                            const items = entry.target.querySelectorAll('li');
-                            items.forEach((item, index) => {
-                                item.style.setProperty('--item-index', index);
-                            });
-                        }
-                        
-                        observer.unobserve(entry.target);
+                        entry.target.style.animationPlayState = 'running';
                     }
                 });
             }, observerOptions);
